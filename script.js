@@ -1,4 +1,4 @@
-//script.js
+// script.js
 
 function login() {
     window.location.href = "home.html";
@@ -46,7 +46,8 @@ function showQuestion() {
         questionImage.alt = questionData.text;
         questionImage.style.display = "block";
     } else {
-        endQuiz(); // Exibe a tela de pontuação sem dados da última pergunta
+        // Exibe a tela de pontuação se todas as perguntas foram respondidas
+        endQuiz();
     }
 }
 
@@ -79,23 +80,88 @@ function showHint() {
 }
 
 // Funções de compartilhamento
-function shareOnFacebook() { /* conteúdo aqui */ }
-function shareOnTwitter() { /* conteúdo aqui */ }
-function openInstagram() { /* conteúdo aqui */ }
+function shareOnFacebook() {
+    const url = "https://www.facebook.com/sharer/sharer.php?u=https://example.com";
+    const text = `Eu consegui uma pontuação de ${score} no EcoDetetive!`;
+    window.open(`${url}&quote=${encodeURIComponent(text)}`, "_blank");
+}
+
+function shareOnTwitter() {
+    const url = "https://twitter.com/intent/tweet";
+    const text = `Eu consegui uma pontuação de ${score} no EcoDetetive! Tente você também! #EcoDetetive`;
+    window.open(`${url}?text=${encodeURIComponent(text)}`, "_blank");
+}
+
+function openInstagram() {
+    window.open("https://www.instagram.com", "_blank");
+}
 
 // Funções de revisão
-function startReview() { /* conteúdo aqui */ }
-function showCorrectAnswer() { /* conteúdo aqui */ }
-function previousReviewQuestion() { /* conteúdo aqui */ }
-function nextReviewQuestion() { /* conteúdo aqui */ }
-function endReview() { /* conteúdo aqui */ }
-function updateReviewNavigationButtons() { /* conteúdo aqui */ }
+function startReview() {
+    reviewMode = true;
+    currentQuestion = 0;
+
+    document.getElementById("score").style.display = "none";
+    document.getElementById("retry-buttons").style.display = "none";
+    document.getElementById("social-footer").style.display = "none";
+    document.getElementById("question-section").style.display = "block";
+    document.getElementById("review-navigation").style.display = "block";
+
+    document.querySelector("button[onclick='answerQuestion(true)']").style.display = "none";
+    document.querySelector("button[onclick='answerQuestion(false)']").style.display = "none";
+    document.querySelector("button[onclick='showHint()']").style.display = "none";
+
+    showCorrectAnswer();
+}
+
+function showCorrectAnswer() {
+    if (currentQuestion >= 0 && currentQuestion < questions[topic].length) {
+        const question = questions[topic][currentQuestion];
+        document.getElementById("question").textContent = question.text;
+        document.getElementById("feedback").textContent = question.isFake ? "Resposta Correta: Falsa" : "Resposta Correta: Verdadeira";
+        document.getElementById("feedback").style.display = "block";
+        document.getElementById("feedback").className = "correct";
+    }
+}
+
+function previousReviewQuestion() {
+    if (currentQuestion > 0) {
+        currentQuestion--;
+        showCorrectAnswer();
+    }
+}
+
+function nextReviewQuestion() {
+    if (currentQuestion < questions[topic].length - 1) {
+        currentQuestion++;
+        showCorrectAnswer();
+    } else {
+        endReview();
+    }
+}
+
+function endReview() {
+    reviewMode = false;
+
+    document.querySelector("button[onclick='answerQuestion(true)']").style.display = "inline-block";
+    document.querySelector("button[onclick='answerQuestion(false)']").style.display = "inline-block";
+    document.querySelector("button[onclick='showHint()']").style.display = "inline-block";
+
+    document.getElementById("question-section").style.display = "none";
+    document.getElementById("review-navigation").style.display = "none";
+    showScore();
+}
+
+function updateReviewNavigationButtons() {
+    document.querySelector("#review-navigation button:first-child").disabled = currentQuestion === 0;
+    document.querySelector("#review-navigation button:last-child").disabled = currentQuestion === questions[topic].length - 1;
+}
 
 function showScore() {
     document.getElementById("score").style.display = "block";
     document.getElementById("final-score").textContent = score;
     document.getElementById("retry-buttons").style.display = "block";
-    document.getElementById("social-footer").style.display = "flex"; // Mostra o footer com os ícones de compartilhamento apenas na tela final
+    document.getElementById("social-footer").style.display = "flex";
 }
 
 function goHome() {
@@ -103,4 +169,14 @@ function goHome() {
     currentQuestion = 0;
     score = 0;
     window.location.href = "home.html";
+}
+
+function endQuiz() {
+    document.getElementById("question-section").style.display = "none";
+    document.getElementById("feedback").style.display = "none";
+    
+    document.getElementById("score").style.display = "block";
+    document.getElementById("final-score").textContent = score;
+    document.getElementById("retry-buttons").style.display = "block";
+    document.getElementById("social-footer").style.display = "flex";
 }
