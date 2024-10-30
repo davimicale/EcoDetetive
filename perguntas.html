@@ -4,17 +4,17 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>EcoDetetive - Perguntas</title>
-  <link rel="stylesheet" href="assets/style.css">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body onload="loadTopic()">
   <div class="container">
     <h1 id="topic-title"></h1>
     
     <!-- Imagem para o tópico de queimadas -->
-    <img src="assets/images/queimadas.png" alt="Imagem de Queimadas" class="question-image" id="queimadas-image" style="display: none;">
+    <img src="queimadas.png" alt="Imagem de Queimadas" class="question-image" id="queimadas-image" style="display: none;">
     
     <!-- Imagem para o tópico de aquecimento global -->
-    <img src="assets/images/aquecimentoglobal.png" alt="Imagem de Aquecimento Global" class="question-image" id="aquecimento-image" style="display: none;">
+    <img src="aquecimentoglobal.png" alt="Imagem de Aquecimento Global" class="question-image" id="aquecimento-image" style="display: none;">
 
     <div id="question-section">
       <p id="question"></p>
@@ -34,6 +34,8 @@
         <button onclick="startReview()">Revisar Respostas</button>
       </div>
     </div>
+    
+    
 
     <!-- Botões de navegação para a revisão -->
     <div id="review-navigation" style="display: none;">
@@ -44,18 +46,18 @@
     <!-- Rodapé com ícones de compartilhamento -->
     <footer id="social-footer" style="display: none;">
       <a href="#" onclick="shareOnFacebook()">
-        <img src="assets/images/facebook.png" alt="Compartilhar no Facebook" class="social-icon">
+        <img src="facebook.png" alt="Compartilhar no Facebook" class="social-icon">
       </a>
       <a href="#" onclick="shareOnTwitter()">
-        <img src="assets/images/twitter.png" alt="Compartilhar no Twitter" class="social-icon">
+        <img src="twitter.png" alt="Compartilhar no Twitter" class="social-icon">
       </a>
       <a href="#" onclick="openInstagram()">
-        <img src="assets/images/instagram.png" alt="Abrir Instagram" class="social-icon">
+        <img src="instagram.png" alt="Abrir Instagram" class="social-icon">
       </a>
     </footer>
 
   </div>
 
-  <script src="scripts/script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
