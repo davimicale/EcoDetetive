@@ -39,8 +39,12 @@ function showQuestion() {
         document.getElementById("question").textContent = questionData.text;
         document.getElementById("feedback").textContent = "";
         document.getElementById("hint").style.display = "none";
-        document.getElementById("question-image").src = questionData.image;
-        document.getElementById("question-image").style.display = "block";
+        
+        // Atualiza a imagem da pergunta
+        const questionImage = document.getElementById("question-image");
+        questionImage.src = questionData.image;
+        questionImage.alt = questionData.text;
+        questionImage.style.display = "block";
     } else {
         endQuiz(); // Exibe a tela de pontuação sem dados da última pergunta
     }
