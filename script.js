@@ -6,14 +6,14 @@ function login() {
 
 const questions = {
     aquecimento: [
-        { text: "O aquecimento global aumentou a temperatura média em 2°C em apenas 10 anos.", isFake: true, hint: "Considere o tempo necessário para mudanças tão drásticas na temperatura média global." },
-        { text: "As emissões de CO₂ são a principal causa do aquecimento global.", isFake: false, hint: "Pense nos gases mais conhecidos que afetam o clima." },
-        { text: "O aumento do nível do mar é uma consequência direta do aquecimento global.", isFake: false, hint: "Reflita sobre as consequências do aquecimento no gelo polar." }
+        { text: "O aquecimento global aumentou a temperatura média em 2°C em apenas 10 anos.", isFake: true, hint: "Considere o tempo necessário para mudanças tão drásticas na temperatura média global.", image: "aquecimentoglobal.png" },
+        { text: "As emissões de CO₂ são a principal causa do aquecimento global.", isFake: false, hint: "Pense nos gases mais conhecidos que afetam o clima.", image: "aquecimento1.png" },
+        { text: "O aumento do nível do mar é uma consequência direta do aquecimento global.", isFake: false, hint: "Reflita sobre as consequências do aquecimento no gelo polar.", image: "aquecimento2.png" }
     ],
     queimadas: [
-        { text: "Queimadas ocorrem naturalmente em áreas de floresta tropical.", isFake: true, hint: "Pense se queimadas frequentes ocorrem naturalmente em florestas densas." },
-        { text: "As queimadas contribuem para o aumento das emissões de CO₂ na atmosfera.", isFake: false, hint: "Reflita sobre o impacto de fogo e combustão no ar." },
-        { text: "Queimadas são sempre causadas por ação humana.", isFake: true, hint: "Considere se incêndios podem começar naturalmente em certas condições." }
+        { text: "Queimadas ocorrem naturalmente em áreas de floresta tropical.", isFake: true, hint: "Pense se queimadas frequentes ocorrem naturalmente em florestas densas.", image: "queimadas.png" },
+        { text: "As queimadas contribuem para o aumento das emissões de CO₂ na atmosfera.", isFake: false, hint: "Reflita sobre o impacto de fogo e combustão no ar.", image: "queimadas1.png" },
+        { text: "Queimadas são sempre causadas por ação humana.", isFake: true, hint: "Considere se incêndios podem começar naturalmente em certas condições.", image: "queimadas3.png" }
     ]
 };
 
@@ -33,28 +33,20 @@ function loadTopic() {
 }
 
 function showQuestion() {
-    // Oculta todas as imagens antes de exibir a imagem correta
-    hideAllImages();
-
     if (currentQuestion < questions[topic].length) {
+        const questionData = questions[topic][currentQuestion];
+        
         document.getElementById("question-section").style.display = "block";
-        document.getElementById("question").textContent = questions[topic][currentQuestion].text;
+        document.getElementById("question").textContent = questionData.text;
         document.getElementById("feedback").textContent = "";
         document.getElementById("hint").style.display = "none";
 
-        // Exibe a imagem correspondente ao tópico e à pergunta atual
-        const imageId = topic === "aquecimento"
-            ? aquecimento-image-${currentQuestion + 1}
-            : queimadas-image-${currentQuestion + 1};
-        document.getElementById(imageId).style.display = "block";
+        // Exibe a imagem correspondente
+        document.querySelector(".question-image").src = `images/${questionData.image}`;
+        document.querySelector(".question-image").style.display = "block";
     } else {
-        endQuiz(); // Exibe a tela de pontuação sem dados da última pergunta
+        endQuiz();
     }
-}
-
-function hideAllImages() {
-    const images = document.querySelectorAll(".question-image");
-    images.forEach(image => image.style.display = "none");
 }
 
 function answerQuestion(isTrue) {
@@ -78,7 +70,7 @@ function showHint() {
     
     if (hintElement.style.display === "none" || hintElement.style.display === "") {
         const hint = questions[topic][currentQuestion].hint;
-        hintElement.textContent = Dica: ${hint};
+        hintElement.textContent = `Dica: ${hint}`;
         hintElement.style.display = "block";
     } else {
         hintElement.style.display = "none";
@@ -87,14 +79,14 @@ function showHint() {
 
 function shareOnFacebook() {
     const url = "https://www.facebook.com/sharer/sharer.php?u=https://example.com";
-    const text = Eu consegui uma pontuação de ${score} no EcoDetetive!;
-    window.open(${url}&quote=${encodeURIComponent(text)}, "_blank");
+    const text = `Eu consegui uma pontuação de ${score} no EcoDetetive!`;
+    window.open(`${url}&quote=${encodeURIComponent(text)}`, "_blank");
 }
 
 function shareOnTwitter() {
     const url = "https://twitter.com/intent/tweet";
-    const text = Eu consegui uma pontuação de ${score} no EcoDetetive! Tente você também! #EcoDetetive;
-    window.open(${url}?text=${encodeURIComponent(text)}, "_blank");
+    const text = `Eu consegui uma pontuação de ${score} no EcoDetetive! Tente você também! #EcoDetetive`;
+    window.open(`${url}?text=${encodeURIComponent(text)}`, "_blank");
 }
 
 function openInstagram() {
@@ -111,7 +103,6 @@ function startReview() {
     document.getElementById("question-section").style.display = "block";
     document.getElementById("review-navigation").style.display = "block";
 
-    // Oculta os botões "Verdadeira", "Falsa" e "Dica" durante a revisão
     document.querySelector("button[onclick='answerQuestion(true)']").style.display = "none";
     document.querySelector("button[onclick='answerQuestion(false)']").style.display = "none";
     document.querySelector("button[onclick='showHint()']").style.display = "none";
@@ -184,3 +175,4 @@ function goHome() {
     score = 0;
     window.location.href = "home.html";
 }
+
