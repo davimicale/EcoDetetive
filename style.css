@@ -131,7 +131,6 @@
   
   .social-icon:hover {
     transform: scale(1.1);
-  }
 /* Estilo para blocos clicáveis na lista de tópicos */
 ul li a {
   display: block;
