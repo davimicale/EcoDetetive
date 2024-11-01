@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EcoDetetive - Cadastro</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* Estilo para o formulário de cadastro */
+    .container {
+      max-width: 600px;
+      margin: auto;
+      padding: 20px;
+      background-color: rgba(255, 255, 255, 0.9);
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+      border-radius: 8px;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    label {
+      margin-top: 15px;
+      font-weight: bold;
+      color: #4CAF50;
+    }
+
+    input[type="text"],
+    input[type="password"],
+    input[type="email"],
+    input[type="tel"],
+    textarea {
+      padding: 8px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      width: 100%;
+    }
+
+    textarea {
+      resize: vertical;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 10px;
+      font-size: 1em;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      background-color: #4CAF50;
+      color: white;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Cadastro no EcoDetetive</h1>
+    <form action="javascript:void(0);" onsubmit="gravarCadastro()">
+      <label for="nomeCompleto">Nome Completo:</label>
+      <input type="text" id="nomeCompleto" required>
+      
+      <label for="nomeUsuario">Nome de Usuário:</label>
+      <input type="text" id="nomeUsuario" required>
+      
+      <label for="senha">Senha:</label>
+      <input type="password" id="senha" required>
+      
+      <label for="email">Email:</label>
+      <input type="email" id="email" required>
+      
+      <label for="telefone">Número de Telefone:</label>
+      <input type="tel" id="telefone" required>
+      
+      <label for="interesse">Por que você se interessa pelo meio ambiente?</label>
+      <textarea id="interesse" required></textarea>
+      
+      <label for="origem">Como você conheceu nosso aplicativo?</label>
+      <textarea id="origem" required></textarea>
+      
+      <button type="submit">Gravar</button>
+    </form>
+  </div>
+
+  <script>
+    function gravarCadastro() {
+      alert("Cadastro gravado com sucesso! Redirecionando para a página de login.");
+      window.location.href = "login.html";
+    }
+  </script>
+</body>
+</html>
