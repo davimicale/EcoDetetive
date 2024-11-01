@@ -9,12 +9,9 @@
 <body onload="loadTopic()">
   <div class="container">
     <h1 id="topic-title"></h1>
-    
-    <!-- Imagem para o tópico de queimadas -->
-    <img src="queimadas.png" alt="Imagem de Queimadas" class="question-image" id="queimadas-image" style="display: none;">
-    
-    <!-- Imagem para o tópico de aquecimento global -->
-    <img src="aquecimentoglobal.png" alt="Imagem de Aquecimento Global" class="question-image" id="aquecimento-image" style="display: none;">
+
+    <!-- Imagem para a pergunta -->
+    <img id="question-image" src="" alt="Imagem da Pergunta" class="question-image" style="display: none;">
 
     <div id="question-section">
       <p id="question"></p>
@@ -34,8 +31,6 @@
         <button onclick="startReview()">Revisar Respostas</button>
       </div>
     </div>
-    
-    
 
     <!-- Botões de navegação para a revisão -->
     <div id="review-navigation" style="display: none;">
